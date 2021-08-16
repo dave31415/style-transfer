@@ -226,6 +226,8 @@ class StyleTransfer(object):
                 Use progressbar flag.
         """
 
+        print('here-st-1')
+
         style_path = os.path.abspath(os.path.split(__file__)[0])
         base_path = os.path.join(style_path, "models", model_name)
 
