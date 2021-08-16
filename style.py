@@ -316,12 +316,12 @@ class StyleTransfer(object):
         print('load model')
         # load net (supressing stderr output)
         # null_fds = os.open(os.devnull, os.O_RDWR)
-        out_orig = os.dup(2)
-        os.dup2(null_fds, 2)
+        # out_orig = os.dup(2)
+        # os.dup2(null_fds, 2)
         print('caffenet')
         net = caffe.Net(str(model_file), str(pretrained_file), caffe.TEST)
-        os.dup2(out_orig, 2)
-        os.close(null_fds)
+        # os.dup2(out_orig, 2)
+        # os.close(null_fds)
         print('closed')
 
         # all models used are trained on imagenet data
