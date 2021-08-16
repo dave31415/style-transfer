@@ -226,7 +226,8 @@ class StyleTransfer(object):
                 Use progressbar flag.
         """
 
-        print('here-st-1')
+        print('here-st-1 init')
+        print('model_name', model_name)
 
         style_path = os.path.abspath(os.path.split(__file__)[0])
         base_path = os.path.join(style_path, "models", model_name)
@@ -240,6 +241,7 @@ class StyleTransfer(object):
 
         # vgg16
         elif model_name == "vgg16":
+            print('here vgg16')
             model_file = os.path.join(base_path, "VGG_ILSVRC_16_layers_deploy.prototxt")
             pretrained_file = os.path.join(base_path, "VGG_ILSVRC_16_layers.caffemodel")
             mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
@@ -263,6 +265,8 @@ class StyleTransfer(object):
             assert False, "model not available"
 
         # add model and weights
+
+        print('loading model')
         self.load_model(model_file, pretrained_file, mean_file)
         self.weights = weights.copy()
         self.layers = []
@@ -272,7 +276,11 @@ class StyleTransfer(object):
         self.use_pbar = use_pbar
 
         # set the callback function
+        print('setting callback')
+
         if self.use_pbar:
+            print('pbar')
+
             def callback(xk):
                 self.grad_iter += 1
                 try:
@@ -283,6 +291,7 @@ class StyleTransfer(object):
                     net_in = xk.reshape(self.net.blobs["data"].data.shape[1:])
                     self._callback(self.transformer.deprocess("data", net_in))
         else:
+            print('no pbar')
             def callback(xk):
                 if self._callback is not None:
                     net_in = xk.reshape(self.net.blobs["data"].data.shape[1:])
