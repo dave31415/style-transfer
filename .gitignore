@@ -4,3 +4,5 @@ outputs/*
 !outputs/.gitkeeper
 test/*
 .DS_Store
+.idea/
+

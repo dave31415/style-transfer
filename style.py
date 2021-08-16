@@ -209,6 +209,7 @@ def style_optfn(x, net, weights, layers, reprs, ratio):
 
     return loss, grad
 
+
 class StyleTransfer(object):
     """
         Style transfer class.
@@ -489,8 +490,11 @@ def main(args):
     
     # artistic style class
     use_pbar = not args.verbose
+    print('here-1')
     st = StyleTransfer(args.model.lower(), use_pbar=use_pbar)
+    print('here-2')
     logging.info("Successfully loaded model {0}.".format(args.model))
+    print('here-3')
 
     # perform style transfer
     start = timeit.default_timer()
