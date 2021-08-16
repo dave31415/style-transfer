@@ -268,6 +268,8 @@ class StyleTransfer(object):
 
         print('loading model')
         self.load_model(model_file, pretrained_file, mean_file)
+        print('loaded model')
+        
         self.weights = weights.copy()
         self.layers = []
         for layer in self.net.blobs:
