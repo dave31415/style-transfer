@@ -269,7 +269,7 @@ class StyleTransfer(object):
         print('loading model')
         self.load_model(model_file, pretrained_file, mean_file)
         print('loaded model')
-        
+
         self.weights = weights.copy()
         self.layers = []
         for layer in self.net.blobs:
@@ -313,14 +313,16 @@ class StyleTransfer(object):
             :param str mean_file:
                 Path to mean file.
         """
-
+        print('load model')
         # load net (supressing stderr output)
-        null_fds = os.open(os.devnull, os.O_RDWR)
+        # null_fds = os.open(os.devnull, os.O_RDWR)
         out_orig = os.dup(2)
         os.dup2(null_fds, 2)
+        print('caffenet')
         net = caffe.Net(str(model_file), str(pretrained_file), caffe.TEST)
         os.dup2(out_orig, 2)
         os.close(null_fds)
+        print('closed')
 
         # all models used are trained on imagenet data
         transformer = caffe.io.Transformer({"data": net.blobs["data"].data.shape})
@@ -332,6 +334,8 @@ class StyleTransfer(object):
         # add net parameters
         self.net = net
         self.transformer = transformer
+
+        print('done load')
 
     def get_generated(self):
         """
